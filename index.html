@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parvis, a multi-tenant SaaS starter</title>
+<meta name="description" content="Angular, Spring Boot and Keycloak starter with organizations, editable roles and an audit log, already wired and tested.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <a class="brand" href="index.html">Parvis</a>
+    <nav><a href="#included">What is included</a><a href="#price">Price</a><a href="fr.html" hreflang="fr" lang="fr">Français</a></nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>The multi-tenant part of your SaaS, already built and tested.</h1>
+      <p>Parvis is a source-code starter on Angular, Spring Boot and Keycloak. Sign-in, organizations, invitations, roles and an audit log are done, so your first week goes into your own product.</p>
+      <a class="btn" href="#price">See the price</a>
+      <a class="btn plain" href="#checked">See what the build checks</a>
+
+      <div class="demo">
+        <pre><code>SELECT name FROM project;   -- same query, same table</code></pre>
+        <div class="pair">
+          <table>
+            <caption>Signed in to Acme</caption>
+            <thead><tr><th>name</th></tr></thead>
+            <tbody><tr><td>Website relaunch</td></tr><tr><td>Billing import</td></tr></tbody>
+          </table>
+          <table>
+            <caption>Signed in to Globex</caption>
+            <thead><tr><th>name</th></tr></thead>
+            <tbody><tr><td>Mobile app v2</td></tr></tbody>
+          </table>
+        </div>
+        <p class="cap">PostgreSQL Row-Level Security does the filtering, not only your code. If someone adds a table without a policy, the build fails.</p>
+      </div>
+    </div>
+
+    <section class="row" id="why">
+      <h2>Why it exists</h2>
+      <div class="body">
+        <p>Every B2B product needs sign-in, organizations, members, roles and a record of who did what before it has a single feature. That is weeks of work.</p>
+        <p>The hard part is keeping one customer's data away from another's. It is also the part that is easiest to get slightly wrong and not notice. Parvis does it once, with tests that prove it.</p>
+      </div>
+    </section>
+
+    <section class="row" id="included">
+      <h2>What is included</h2>
+      <div class="body">
+        <dl class="features">
+          <div><dt>Organizations and invitations</dt><dd>Signing up creates an organization and makes its creator the Owner. Other people join by invitation.</dd></div>
+          <div><dt>Roles you can edit</dt><dd>Each organization composes its own roles on a screen. It cannot lose its last Owner or hand out a permission its editor does not hold.</dd></div>
+          <div><dt>Audit log</dt><dd>One per organization, with a screen to read and filter it.</dd></div>
+          <div><dt>Keycloak, managed from the app</dt><dd>Members, invitations and settings are handled in your own screens, so nobody opens the Keycloak console.</dd></div>
+          <div><dt>Sessions without tokens in the browser</dt><dd>Server-side OIDC with an HttpOnly cookie. The API also accepts a Bearer token.</dd></div>
+          <div><dt>Operator screen</dt><dd>List and suspend organizations.</dd></div>
+          <div><dt>English and French, light and dark</dt><dd>Switch language without a reload. Colours come from a theme file.</dd></div>
+          <div><dt>Tests and CI</dt><dd><code>docker compose up</code> runs it. A separate Compose file is for production. GitHub Actions cover backend, frontend, end-to-end and images.</dd></div>
+          <div><dt>Room for your code</dt><dd>Your own migrations folder with reserved version ranges, a way to add permissions, and architecture tests that keep your additions on the safe path.</dd></div>
+          <div><dt>Documentation in English and French</dt><dd>One page per feature, each with an example.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="row" id="screens">
+      <h2>Screens</h2>
+      <div class="body wide">
+        <div class="shots">
+          <figure><img src="assets/projects.png" alt="Projects list, light theme" loading="lazy" width="1440" height="900"><figcaption>Projects, light theme</figcaption></figure>
+          <figure><img src="assets/projects-dark.png" alt="Projects list, dark theme" loading="lazy" width="1440" height="900"><figcaption>Projects, dark theme</figcaption></figure>
+          <figure><img src="assets/roles.png" alt="Role editing screen" loading="lazy" width="1440" height="900"><figcaption>Editing a role</figcaption></figure>
+          <figure><img src="assets/operator.png" alt="Operator screen listing organizations" loading="lazy" width="1440" height="900"><figcaption>Operator view of all organizations</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="row" id="checked">
+      <h2>What the build checks</h2>
+      <div class="body wide">
+        <table class="facts">
+          <tbody>
+            <tr><th scope="row">Data isolation</th><td>Tests cover JPA, native SQL and tables you add. <code>RlsCoverageIT</code> fails the build on any table without a policy.</td></tr>
+            <tr><th scope="row">Permissions</th><td>Every route declares the permission it needs. An architecture test fails the build if one does not.</td></tr>
+            <tr><th scope="row">Production settings</th><td>The production Compose file refuses public <code>change-me-*</code> secrets and plain-HTTP realms.</td></tr>
+            <tr><th scope="row">Test count</th><td>672 backend, about 290 frontend and 27 end-to-end tests (Playwright).</td></tr>
+            <tr><th scope="row">Security review</th><td>Scanned with semgrep, dependency advisories checked, and a manual review done. Every finding was fixed with a test.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="row" id="stack">
+      <h2>Stack</h2>
+      <div class="body">
+        <p>Java 25, Spring Boot 4.1, Spring Security 7, Hibernate 7, PostgreSQL 18, Flyway, Angular 22, Keycloak 26.8, nginx, Playwright, Docker Compose and GitHub Actions. You need Java 25 and Node 24 LTS.</p>
+        <p>To run the demo:</p>
+        <pre><code>cp .env.example .env
+docker compose --profile demo up -d --build --wait</code></pre>
+        <p>Then open <code>http://localhost:4200</code>.</p>
+      </div>
+    </section>
+
+    <section class="row" id="fit">
+      <h2>Is it for you</h2>
+      <div class="body">
+        <p>It suits freelancers, small agencies and SaaS publishers building a multi-tenant B2B product on this exact stack.</p>
+        <p><span class="not">Not included:</span> subscriptions and payments, SAML presets, several organizations per user, Kubernetes manifests, a published image registry. If you want a code generator or another frontend, JHipster is free and a good choice.</p>
+      </div>
+    </section>
+
+    <section class="row" id="price">
+      <h2>Price</h2>
+      <div class="body">
+        <div class="plans">
+          <div><h3>One project</h3><div class="price">149 €</div><p>Full source for one product.</p></div>
+          <div><h3>Unlimited projects</h3><div class="price">299 €</div><p>Full source for as many products as you build.</p></div>
+        </div>
+        <p class="small">One payment, no subscription. You get updates for 12 months. Lemon Squeezy handles the payment and the VAT. You receive one .zip archive with its SHA-256 checksum.</p>
+        <p><strong>Sales open soon.</strong> Write to <a href="mailto:CONTACT_EMAIL">CONTACT_EMAIL</a> to be told when Parvis is available.</p>
+        <!-- TODO: restore the buy button once the Lemon Squeezy link exists:
+        <p><a class="btn" href="CHECKOUT_URL">Buy Parvis</a></p> -->
+      </div>
+    </section>
+
+    <section class="row" id="faq">
+      <h2>Questions</h2>
+      <div class="body">
+        <p><strong>Do I get the source?</strong><br>Yes, all of it, to change and build on. The <a href="legal.html#terms">terms</a> set the licence.</p>
+        <p><strong>Can I run it in production?</strong><br>It ships a production Compose example, migrations as a separate step and a security page that says what is enforced and what stays yours. TLS and the reverse proxy are yours to provide.</p>
+        <p><strong>Who answers my questions?</strong><br>Me, by email. See <a href="legal.html#support">support</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <a href="legal.html">Terms, refunds and privacy</a> and <a href="mailto:CONTACT_EMAIL">CONTACT_EMAIL</a>
+  </footer>
+</div>
+</body>
+</html>

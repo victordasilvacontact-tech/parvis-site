@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parvis, un kit SaaS multi-organisations</title>
+<meta name="description" content="Kit Angular, Spring Boot et Keycloak avec organisations, rôles modifiables et journal d'audit, déjà câblés et testés.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <a class="brand" href="fr.html">Parvis</a>
+    <nav><a href="#included">Contenu</a><a href="#price">Prix</a><a href="index.html" hreflang="en" lang="en">English</a></nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>La partie multi-organisations de votre SaaS, déjà construite et testée.</h1>
+      <p>Parvis est un kit en code source sur Angular, Spring Boot et Keycloak. Connexion, organisations, invitations, rôles et journal d'audit sont faits : votre première semaine sert votre propre produit.</p>
+      <a class="btn" href="#price">Voir le prix</a>
+      <a class="btn plain" href="#checked">Ce que le build vérifie</a>
+
+      <div class="demo">
+        <pre><code>SELECT name FROM project;   -- même requête, même table</code></pre>
+        <div class="pair">
+          <table>
+            <caption>Connecté à Acme</caption>
+            <thead><tr><th>name</th></tr></thead>
+            <tbody><tr><td>Website relaunch</td></tr><tr><td>Billing import</td></tr></tbody>
+          </table>
+          <table>
+            <caption>Connecté à Globex</caption>
+            <thead><tr><th>name</th></tr></thead>
+            <tbody><tr><td>Mobile app v2</td></tr></tbody>
+          </table>
+        </div>
+        <p class="cap">C'est la sécurité au niveau des lignes de PostgreSQL qui filtre, pas seulement votre code. Si quelqu'un ajoute une table sans politique, le build échoue.</p>
+      </div>
+    </div>
+
+    <section class="row" id="why">
+      <h2>Pourquoi ce kit</h2>
+      <div class="body">
+        <p>Tout produit B2B a besoin de connexion, d'organisations, de membres, de rôles et d'une trace de qui a fait quoi avant d'avoir une seule fonctionnalité. C'est des semaines de travail.</p>
+        <p>Le plus dur est de garder les données d'un client hors de portée d'un autre. C'est aussi ce qu'on rate le plus facilement sans s'en apercevoir. Parvis le fait une fois, avec des tests qui le prouvent.</p>
+      </div>
+    </section>
+
+    <section class="row" id="included">
+      <h2>Contenu</h2>
+      <div class="body">
+        <dl class="features">
+          <div><dt>Organisations et invitations</dt><dd>L'inscription crée une organisation et fait de son créateur le Propriétaire. Les autres personnes entrent sur invitation.</dd></div>
+          <div><dt>Rôles modifiables</dt><dd>Chaque organisation compose ses rôles sur un écran. Elle ne peut pas perdre son dernier Propriétaire ni accorder une permission que son éditeur n'a pas.</dd></div>
+          <div><dt>Journal d'audit</dt><dd>Un par organisation, avec un écran pour le lire et le filtrer.</dd></div>
+          <div><dt>Keycloak, piloté depuis l'application</dt><dd>Membres, invitations et réglages se gèrent dans vos écrans : personne n'ouvre la console Keycloak.</dd></div>
+          <div><dt>Sessions sans jeton dans le navigateur</dt><dd>OIDC côté serveur avec un cookie HttpOnly. L'API accepte aussi un jeton Bearer.</dd></div>
+          <div><dt>Écran opérateur</dt><dd>Lister et suspendre des organisations.</dd></div>
+          <div><dt>Français et anglais, clair et sombre</dt><dd>Changement de langue sans rechargement. Les couleurs viennent d'un fichier de thème.</dd></div>
+          <div><dt>Tests et CI</dt><dd><code>docker compose up</code> le lance. Un fichier Compose séparé sert la production. GitHub Actions couvre le backend, le frontend, le bout en bout et les images.</dd></div>
+          <div><dt>De la place pour votre code</dt><dd>Votre dossier de migrations avec des plages de versions réservées, un moyen d'ajouter des permissions, et des tests d'architecture qui gardent vos ajouts sur le bon chemin.</dd></div>
+          <div><dt>Documentation en français et en anglais</dt><dd>Une page par fonctionnalité, chacune avec un exemple.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="row" id="screens">
+      <h2>Écrans</h2>
+      <div class="body wide">
+        <div class="shots">
+          <figure><img src="assets/projects.png" alt="Liste des projets, thème clair" loading="lazy" width="1440" height="900"><figcaption>Projets, thème clair</figcaption></figure>
+          <figure><img src="assets/projects-dark.png" alt="Liste des projets, thème sombre" loading="lazy" width="1440" height="900"><figcaption>Projets, thème sombre</figcaption></figure>
+          <figure><img src="assets/roles.png" alt="Écran d'édition d'un rôle" loading="lazy" width="1440" height="900"><figcaption>Édition d'un rôle</figcaption></figure>
+          <figure><img src="assets/operator.png" alt="Écran opérateur listant les organisations" loading="lazy" width="1440" height="900"><figcaption>Vue opérateur de toutes les organisations</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="row" id="checked">
+      <h2>Ce que le build vérifie</h2>
+      <div class="body wide">
+        <table class="facts">
+          <tbody>
+            <tr><th scope="row">Isolation des données</th><td>Des tests couvrent JPA, le SQL natif et les tables que vous ajoutez. <code>RlsCoverageIT</code> fait échouer le build sur toute table sans politique.</td></tr>
+            <tr><th scope="row">Permissions</th><td>Chaque route déclare la permission requise. Un test d'architecture fait échouer le build si ce n'est pas le cas.</td></tr>
+            <tr><th scope="row">Réglages de production</th><td>Le Compose de production refuse les secrets publics <code>change-me-*</code> et les realms en HTTP simple.</td></tr>
+            <tr><th scope="row">Nombre de tests</th><td>672 en backend, environ 290 en frontend et 27 de bout en bout (Playwright).</td></tr>
+            <tr><th scope="row">Revue de sécurité</th><td>Analyse semgrep, avis de sécurité des dépendances vérifiés et revue manuelle. Chaque constat a été corrigé avec un test.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="row" id="stack">
+      <h2>Technologies</h2>
+      <div class="body">
+        <p>Java 25, Spring Boot 4.1, Spring Security 7, Hibernate 7, PostgreSQL 18, Flyway, Angular 22, Keycloak 26.8, nginx, Playwright, Docker Compose et GitHub Actions. Il vous faut Java 25 et Node 24 LTS.</p>
+        <p>Pour lancer la démo :</p>
+        <pre><code>cp .env.example .env
+docker compose --profile demo up -d --build --wait</code></pre>
+        <p>Puis ouvrez <code>http://localhost:4200</code>.</p>
+      </div>
+    </section>
+
+    <section class="row" id="fit">
+      <h2>Est-ce pour vous</h2>
+      <div class="body">
+        <p>Il convient aux freelances, petites agences et éditeurs de SaaS qui construisent un produit B2B multi-organisations sur cette pile exacte.</p>
+        <p><span class="not">Non inclus :</span> abonnements et paiements, préréglages SAML, plusieurs organisations par utilisateur, manifestes Kubernetes, registre d'images publié. Si vous voulez un générateur de code ou un autre frontend, JHipster est gratuit et un bon choix.</p>
+      </div>
+    </section>
+
+    <section class="row" id="price">
+      <h2>Prix</h2>
+      <div class="body">
+        <div class="plans">
+          <div><h3>Un projet</h3><div class="price">149 €</div><p>Le code source complet pour un produit.</p></div>
+          <div><h3>Projets illimités</h3><div class="price">299 €</div><p>Le code source complet pour autant de produits que vous en construisez.</p></div>
+        </div>
+        <p class="small">Un seul paiement, sans abonnement. Vous recevez les mises à jour pendant 12 mois. Lemon Squeezy gère le paiement et la TVA. Vous recevez une archive .zip avec sa somme de contrôle SHA-256.</p>
+        <p><strong>Ouverture des ventes bientôt.</strong> Écrivez à <a href="mailto:CONTACT_EMAIL">CONTACT_EMAIL</a> pour être prévenu de la disponibilité de Parvis.</p>
+        <!-- TODO : remettre le bouton d'achat quand le lien Lemon Squeezy existera :
+        <p><a class="btn" href="CHECKOUT_URL">Acheter Parvis</a></p> -->
+      </div>
+    </section>
+
+    <section class="row" id="faq">
+      <h2>Questions</h2>
+      <div class="body">
+        <p><strong>Ai-je le code source ?</strong><br>Oui, en entier, pour le modifier et construire dessus. Les <a href="legal.html#terms">conditions</a> fixent la licence.</p>
+        <p><strong>Puis-je le mettre en production ?</strong><br>Il fournit un exemple Compose de production, les migrations comme étape séparée et une page de sécurité qui dit ce qui est garanti et ce qui reste à votre charge. Le TLS et le reverse proxy sont à vous.</p>
+        <p><strong>Qui répond à mes questions ?</strong><br>Moi, par email. Voir le <a href="legal.html#support">support</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <a href="legal.html">Conditions, remboursement et confidentialité</a> et <a href="mailto:CONTACT_EMAIL">CONTACT_EMAIL</a>
+  </footer>
+</div>
+</body>
+</html>
