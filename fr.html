@@ -12,15 +12,15 @@
 <div class="page">
   <header class="top">
     <a class="brand" href="fr.html">Parvis</a>
-    <nav><a href="#included">Contenu</a><a href="#demo">Démo</a><a href="index.html" hreflang="en" lang="en">English</a></nav>
+    <nav><a href="#included">Contenu</a><a href="#demo">Démo</a><a href="#price">Prix</a><a href="index.html" hreflang="en" lang="en">English</a></nav>
   </header>
 
   <main>
     <div class="hero">
       <h1>La partie multi-organisations de votre SaaS, déjà construite et testée.</h1>
       <p>Parvis est un kit en code source sur Angular, Spring Boot et Keycloak. Connexion, organisations, invitations, rôles et journal d'audit sont faits : votre première semaine sert votre propre produit.</p>
-      <a class="btn" href="#demo">Voir la démo</a>
-      <a class="btn plain" href="#checked">Ce que le build vérifie</a>
+      <a class="btn" href="https://victor-store.lemonsqueezy.com/checkout/buy/6293aa83-1ba6-4c6f-8490-43995350f94e">Acheter Parvis</a>
+      <a class="btn plain" href="#demo">Voir la démo</a>
 
       <div class="demo">
         <pre><code>SELECT name FROM project;   -- même requête, même table</code></pre>
@@ -137,11 +137,14 @@ docker compose --profile demo up -d --build --wait</code></pre>
       </div>
     </section>
 
-    <section class="row" id="availability">
-      <h2>Disponibilité</h2>
+    <section class="row" id="price">
+      <h2>Prix</h2>
       <div class="body">
-        <p><strong>Ouverture des ventes bientôt.</strong> Écrivez à <a href="mailto:victor.dasilva.contact@gmail.com">victor.dasilva.contact@gmail.com</a> pour être prévenu de la disponibilité de Parvis.</p>
-        <!-- TODO : remettre les prix et le bouton d'achat quand le produit existera chez Lemon Squeezy (CHECKOUT_URL). -->
+        <div class="plans" style="grid-template-columns:1fr">
+          <div><h3>Licence unique, projets illimités</h3><div class="price">149 €</div><p>Le code source complet, pour autant de produits que vous en construisez, pour vous ou vos clients.</p></div>
+        </div>
+        <p class="small">Un seul paiement, sans abonnement. Mises à jour incluses pendant 12 mois. Lemon Squeezy gère le paiement et la TVA. Vous recevez une archive .zip avec sa somme de contrôle SHA-256.</p>
+        <p><a class="btn" href="https://victor-store.lemonsqueezy.com/checkout/buy/6293aa83-1ba6-4c6f-8490-43995350f94e">Acheter Parvis</a></p>
       </div>
     </section>
 
