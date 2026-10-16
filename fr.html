@@ -40,6 +40,31 @@
       </div>
     </div>
 
+    <section class="row" id="demo">
+      <h2>Démo</h2>
+      <div class="body wide player">
+        <p>Huit scènes de 15 à 25 secondes, enregistrées sur la démo livrée avec le kit. Elles s'enchaînent ; choisissez-en une pour y aller directement.</p>
+        <video id="demo-video" controls muted playsinline preload="metadata" poster="assets/demo-poster.png" src="videos/01-sign-in.webm">Votre navigateur ne lit pas la vidéo : ouvrez une scène dans la liste ci-dessous.</video>
+        <ol class="chapters" aria-label="Scènes de la démo"><li><a href="videos/01-sign-in.webm" data-src="videos/01-sign-in.webm" aria-current="true">Connexion</a></li><li><a href="videos/02-projects.webm" data-src="videos/02-projects.webm">Projets</a></li><li><a href="videos/03-members.webm" data-src="videos/03-members.webm">Membres</a></li><li><a href="videos/04-roles.webm" data-src="videos/04-roles.webm">Rôles</a></li><li><a href="videos/05-audit-log.webm" data-src="videos/05-audit-log.webm">Journal d'audit</a></li><li><a href="videos/06-isolation.webm" data-src="videos/06-isolation.webm">Deux organisations</a></li><li><a href="videos/07-operator.webm" data-src="videos/07-operator.webm">Opérateur</a></li><li><a href="videos/08-language-and-theme.webm" data-src="videos/08-language-and-theme.webm">Langue et thème</a></li></ol>
+      </div>
+    </section>
+    <script>
+      (function () {
+        var video = document.getElementById('demo-video');
+        var links = Array.prototype.slice.call(document.querySelectorAll('.chapters a'));
+        function play(i, autoplay) {
+          links.forEach(function (a, j) { if (j === i) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+          video.src = links[i].getAttribute('data-src');
+          if (autoplay) video.play();
+        }
+        links.forEach(function (a, i) { a.addEventListener('click', function (e) { e.preventDefault(); play(i, true); }); });
+        video.addEventListener('ended', function () {
+          var i = links.findIndex(function (a) { return a.getAttribute('aria-current') === 'true'; });
+          if (i < links.length - 1) play(i + 1, true);
+        });
+      })();
+    </script>
+
     <section class="row" id="why">
       <h2>Pourquoi ce kit</h2>
       <div class="body">
@@ -120,7 +145,7 @@ docker compose --profile demo up -d --build --wait</code></pre>
           <div><h3>Projets illimités</h3><div class="price">299 €</div><p>Le code source complet pour autant de produits que vous en construisez.</p></div>
         </div>
         <p class="small">Un seul paiement, sans abonnement. Vous recevez les mises à jour pendant 12 mois. Lemon Squeezy gère le paiement et la TVA. Vous recevez une archive .zip avec sa somme de contrôle SHA-256.</p>
-        <p><strong>Ouverture des ventes bientôt.</strong> Écrivez à <a href="mailto:CONTACT_EMAIL">CONTACT_EMAIL</a> pour être prévenu de la disponibilité de Parvis.</p>
+        <p><strong>Ouverture des ventes bientôt.</strong> Écrivez à <a href="mailto:victor.dasilva.contact@gmail.com">victor.dasilva.contact@gmail.com</a> pour être prévenu de la disponibilité de Parvis.</p>
         <!-- TODO : remettre le bouton d'achat quand le lien Lemon Squeezy existera :
         <p><a class="btn" href="CHECKOUT_URL">Acheter Parvis</a></p> -->
       </div>
@@ -137,7 +162,7 @@ docker compose --profile demo up -d --build --wait</code></pre>
   </main>
 
   <footer class="foot">
-    <a href="legal.html">Conditions, remboursement et confidentialité</a> et <a href="mailto:CONTACT_EMAIL">CONTACT_EMAIL</a>
+    <a href="legal.html">Conditions, remboursement et confidentialité</a> et <a href="mailto:victor.dasilva.contact@gmail.com">victor.dasilva.contact@gmail.com</a>
   </footer>
 </div>
 </body>

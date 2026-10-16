@@ -40,6 +40,31 @@
       </div>
     </div>
 
+    <section class="row" id="demo">
+      <h2>Demo</h2>
+      <div class="body wide player">
+        <p>Eight scenes of 15 to 25 seconds, recorded on the demo that ships with the kit. They play one after the other; pick one to jump to it.</p>
+        <video id="demo-video" controls muted playsinline preload="metadata" poster="assets/demo-poster.png" src="videos/01-sign-in.webm">Your browser cannot play the video: open a scene from the list below.</video>
+        <ol class="chapters" aria-label="Demo scenes"><li><a href="videos/01-sign-in.webm" data-src="videos/01-sign-in.webm" aria-current="true">Sign in</a></li><li><a href="videos/02-projects.webm" data-src="videos/02-projects.webm">Projects</a></li><li><a href="videos/03-members.webm" data-src="videos/03-members.webm">Members</a></li><li><a href="videos/04-roles.webm" data-src="videos/04-roles.webm">Roles</a></li><li><a href="videos/05-audit-log.webm" data-src="videos/05-audit-log.webm">Audit log</a></li><li><a href="videos/06-isolation.webm" data-src="videos/06-isolation.webm">Two organizations</a></li><li><a href="videos/07-operator.webm" data-src="videos/07-operator.webm">Operator</a></li><li><a href="videos/08-language-and-theme.webm" data-src="videos/08-language-and-theme.webm">Language and theme</a></li></ol>
+      </div>
+    </section>
+    <script>
+      (function () {
+        var video = document.getElementById('demo-video');
+        var links = Array.prototype.slice.call(document.querySelectorAll('.chapters a'));
+        function play(i, autoplay) {
+          links.forEach(function (a, j) { if (j === i) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+          video.src = links[i].getAttribute('data-src');
+          if (autoplay) video.play();
+        }
+        links.forEach(function (a, i) { a.addEventListener('click', function (e) { e.preventDefault(); play(i, true); }); });
+        video.addEventListener('ended', function () {
+          var i = links.findIndex(function (a) { return a.getAttribute('aria-current') === 'true'; });
+          if (i < links.length - 1) play(i + 1, true);
+        });
+      })();
+    </script>
+
     <section class="row" id="why">
       <h2>Why it exists</h2>
       <div class="body">
@@ -120,7 +145,7 @@ docker compose --profile demo up -d --build --wait</code></pre>
           <div><h3>Unlimited projects</h3><div class="price">299 €</div><p>Full source for as many products as you build.</p></div>
         </div>
         <p class="small">One payment, no subscription. You get updates for 12 months. Lemon Squeezy handles the payment and the VAT. You receive one .zip archive with its SHA-256 checksum.</p>
-        <p><strong>Sales open soon.</strong> Write to <a href="mailto:CONTACT_EMAIL">CONTACT_EMAIL</a> to be told when Parvis is available.</p>
+        <p><strong>Sales open soon.</strong> Write to <a href="mailto:victor.dasilva.contact@gmail.com">victor.dasilva.contact@gmail.com</a> to be told when Parvis is available.</p>
         <!-- TODO: restore the buy button once the Lemon Squeezy link exists:
         <p><a class="btn" href="CHECKOUT_URL">Buy Parvis</a></p> -->
       </div>
@@ -137,7 +162,7 @@ docker compose --profile demo up -d --build --wait</code></pre>
   </main>
 
   <footer class="foot">
-    <a href="legal.html">Terms, refunds and privacy</a> and <a href="mailto:CONTACT_EMAIL">CONTACT_EMAIL</a>
+    <a href="legal.html">Terms, refunds and privacy</a> and <a href="mailto:victor.dasilva.contact@gmail.com">victor.dasilva.contact@gmail.com</a>
   </footer>
 </div>
 </body>
